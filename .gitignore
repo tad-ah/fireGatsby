@@ -189,3 +189,5 @@ typings/
 .history
 
 # End of https://www.gitignore.io/api/node,firebase,jetbrains+all,visualstudiocode
+
+build/
