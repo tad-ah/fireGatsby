@@ -1,15 +1,16 @@
 language: node_js
 node_js:
-  - "node"
+- node
 script:
-  -
+- 
 before_install:
--   npm i -g typescript@3.2.2 && npm i -g tslint@5.12.0
+- npm i -g typescript@3.2.2 && npm i -g tslint@5.12.0
 before_deploy:
-  - npm run build
-  - cd ./functions && npm i && npm run build && cd ..
+- npm run build
+- cd ./functions && npm i && npm run build && cd ..
 deploy:
   skip_cleanup: true
   provider: firebase
-  token:
-    secure: "ky85BR5+akZmse+vpDFhwhoCBthZKWpu2sJoYuTffMZPTiTvprJ56q+O2WySSLf+T+meRMuGsHjypZwIYKpXf0IfTdrSJcRNglfmjbJlkR+NbyRWAi/Yyy/Aqig3eGk4cDpZAZAQskaBlGn/tenAVyYADVeTSrmw+lwmoBMYtpKi0j6zm45nlMaTqqjPEmPC4fVrvr3Js+gczdYkTHkEXThY2deCxQvRvnsLR7J87s7NCAWUxQjvpngCEIWNkLCHv74rAtOtKr4csLnzOrNe01Fz51FmxFFdcSFGP9ux2rhTgeIUqjmU/sWTKX/tk3myAxGjXKBY94NQYNY2g+WpKJiEnScNafLYSTcU10L6zyElJLMu7G8lVv2vmzmAzf1gABPZjGS1PQvYICbVo9Y5HX7sg/gSlx9C83Kit0dSfbWs113vL71QftXznaCGkP1xk25pK1sb0Ft4/lwyGIsqb9NEzkDiK7o5LBeS40bE0WePep/ybRMcUgvL+aNPQ051eRcbTUadVzAL9iK4VoHmcQaZuGw7ouPe2bJ9PVteZ2JCJ/Ur2doCvtc5r98pISyAP/3Tul+n8BKo6CDh4wHSOb6ysRrrGaMmvhIxgBEUObt2CmxqxwU7BLVEtvEczICuj3SMrCAj+V6/AjFZufk+qC4VuW2j/BmvzoBGQ+VJyBQ="
+env:
+  global:
+    secure: mOELmNo2kNeAUmoC4UvWXk/enYOGqQTjCUKKc8mWmgIROcZzHq67aIXI3U0vFuljtSCyu8kLG3iWkjrYL2tsKhYimlPoFjCiYX0JhEHb8rK9mpYONXJhbERzHcxU0M1/4C3s3c2TOEPV1oN76eNCk5aLBLCtALIV0lsVzQyrzjeqyHdqIV9yXBobxBNyZ7HI6cYS2xJoVYm8xpZM9X1Ok5MVPmF2bq1fg8kOCe/oD6/ArHyx4NbS19ToLg2dKyEl9d+pkM0yNdWHk3oB+b6bDx+4Qb0zsJu0SommaByT5dnDen35mnbMfFQBGe8uzenS4cthnPp8k/3P7WLGzrEUKOCU2xg4gku6P3IhO9o1XAZW63bvLyHd5s5ro2jdan2cxwoDznWQV/sxF366cCCXkMqlJvvyh8DxMXG0hZviN/AX8Ypxn9gzrO8vX+KZgLj75OcNiRxDdFidy6CEWvzFyxF4WfhG6sTYj4joxNP9TAerp7DwHrfXiPJ0p7WpIXRxKo1LVKK5SsKwr/QrKok8fHtHvSndzhxfLmh0P+Ed7Ws8eK5ipqcBVTqcu5YKjCjWBAsCnCumTp/ci8Ieb87IuESCWWmJz8pjc1CT7Z5hwdHnYsR72z2ZO37AaWhvbVr5Ff4qgas2ffuCww/ss4TkBVAhLG5xzuq9T2bkf0cQbgc=
