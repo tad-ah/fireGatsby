@@ -2,29 +2,23 @@ import config from './config';
 import firebase from 'firebase';
 import moment from 'moment';
 
-class FirebaseClient {
+class Firebase {
+    static instance;
+
     constructor() {
+        if (Firebase.instance) {
+            return Firebase.instance;
+        }
         this.fire = firebase.initializeApp(config);
-    }
-
-    database() {
-        return this.fire.firestore();
-    }
-
-    storage() {
-        return this.fire.storage();
-    }
-
-    auth() {
-        return this.fire.auth();
-    }
-
-    functions() {
-        return this.fire.functions();
+        this.database = firebase.firestore();
+        this.storage = firebase.storage();
+        this.functions = firebase.functions();
+        this.auth = firebase.auth();
+        Firebase.instance = this;
     }
 }
 
-class DatabaseInterface {
+class Database {
     constructor(database) {
         this.database = database;
     }
@@ -75,6 +69,4 @@ class DatabaseInterface {
     }
 }
 
-const Firebase = new FirebaseClient();
-const Db = new DatabaseInterface(Firebase.database());
-export { Firebase, Db };
+export { Firebase, Database };

@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import styled from 'styled-components';
-import { Db } from '../firebase';
+import { Database, Firebase } from '../firebase';
 
 const Container = styled.div`
     display: flex;
@@ -16,13 +16,15 @@ class Comments extends Component {
         };
     }
 
-    componentWillMount() {
-        Db.getComments().then(comments => this.setState({ comments }));
-        Db.subscribeToComments(comments => this.setState({ comments })); //.then(comments => this.setState({ comments }));
+    componentDidMount() {
+        this.firebase = new Firebase();
+        this.Db = new Database(this.firebase.database);
+        this.Db.getComments().then(comments => this.setState({ comments }));
+        this.Db.subscribeToComments(comments => this.setState({ comments })); //.then(comments => this.setState({ comments }));
     }
 
     addComment = comment => {
-        Db.addComment(comment);
+        this.Db.addComment(comment);
     };
 
     render() {
@@ -56,7 +58,9 @@ const CommentInput = ({ saveComment }) => {
 const CommentList = ({ comments }) => (
     <ul>
         {comments.map(el => (
-            <li key={el.id}>{el.text} - {el.time}</li>
+            <li key={el.id}>
+                {el.text} - {el.time}
+            </li>
         ))}
     </ul>
 );
