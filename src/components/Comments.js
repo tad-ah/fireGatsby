@@ -8,6 +8,10 @@ const Container = styled.div`
     justify-content: space-around;
 `;
 
+const CommentTimestamp = styled.small`
+    color: grey;
+`;
+
 class Comments extends Component {
     constructor(props) {
         super(props);
@@ -59,7 +63,7 @@ const CommentList = ({ comments }) => (
     <ul>
         {comments.map(el => (
             <li key={el.id}>
-                {el.text} - {el.time}
+                {el.text} - <CommentTimestamp>{el.time}</CommentTimestamp>
             </li>
         ))}
     </ul>
