@@ -20,6 +20,7 @@ export default ({ children }) => (
                 <ListLink to="/">Home</ListLink>
                 <ListLink to="/comments/">Firestore</ListLink>
                 <ListLink to="/storage/">Storage</ListLink>
+                <ListLink to="/storage-upload/">Storage Upload</ListLink>
             </ul>
         </header>
         {children}

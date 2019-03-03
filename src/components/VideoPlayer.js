@@ -9,9 +9,9 @@ const Container = styled.div`
 `;
 
 const smallVideo =
-    'gs://fir-and-react-79638.appspot.com/spider-man-into-the-spider-verse-trailer-1_h480p.mov';
+    'gs://firegatsby.appspot.com/spider-man-into-the-spider-verse-trailer-1_h480p.mov';
 const bigVideo =
-    'gs://fir-and-react-79638.appspot.com/spider-man-into-the-spider-verse-trailer-3_h1080p.mov';
+    'gs://firegatsby.appspot.com/spider-man-into-the-spider-verse-trailer-3_h1080p.mov';
 
 class VideoPlayer extends Component {
     constructor(props) {
