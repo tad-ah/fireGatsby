@@ -15,6 +15,10 @@ jobs:
         steps:
             - checkout
 
+            -run:
+                name: Print node, npm and yarn versions
+                command: node -v && npm -v && yarn -v
+
             # Download and cache dependencies
             - restore_cache:
                   keys:
