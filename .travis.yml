@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "node"
+script:
+  -
+before_install:
+-   npm i -g typescript@3.2.2 && npm i -g tslint@5.12.0
+before_deploy:
+  - npm run build
+  - cd ./functions && npm i && npm run build && cd ..
+deploy:
+  skip_cleanup: true
+  provider: firebase
+  token:
+    secure: "ky85BR5+akZmse+vpDFhwhoCBthZKWpu2sJoYuTffMZPTiTvprJ56q+O2WySSLf+T+meRMuGsHjypZwIYKpXf0IfTdrSJcRNglfmjbJlkR+NbyRWAi/Yyy/Aqig3eGk4cDpZAZAQskaBlGn/tenAVyYADVeTSrmw+lwmoBMYtpKi0j6zm45nlMaTqqjPEmPC4fVrvr3Js+gczdYkTHkEXThY2deCxQvRvnsLR7J87s7NCAWUxQjvpngCEIWNkLCHv74rAtOtKr4csLnzOrNe01Fz51FmxFFdcSFGP9ux2rhTgeIUqjmU/sWTKX/tk3myAxGjXKBY94NQYNY2g+WpKJiEnScNafLYSTcU10L6zyElJLMu7G8lVv2vmzmAzf1gABPZjGS1PQvYICbVo9Y5HX7sg/gSlx9C83Kit0dSfbWs113vL71QftXznaCGkP1xk25pK1sb0Ft4/lwyGIsqb9NEzkDiK7o5LBeS40bE0WePep/ybRMcUgvL+aNPQ051eRcbTUadVzAL9iK4VoHmcQaZuGw7ouPe2bJ9PVteZ2JCJ/Ur2doCvtc5r98pISyAP/3Tul+n8BKo6CDh4wHSOb6ysRrrGaMmvhIxgBEUObt2CmxqxwU7BLVEtvEczICuj3SMrCAj+V6/AjFZufk+qC4VuW2j/BmvzoBGQ+VJyBQ="

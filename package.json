@@ -25,6 +25,7 @@
     "typography-theme-fairy-gates": "^0.16.18"
   },
   "devDependencies": {
+    "firebase-tools": "^6.4.0",
     "prettier": "^1.16.4"
   },
   "repository": {
