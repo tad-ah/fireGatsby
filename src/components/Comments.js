@@ -55,6 +55,7 @@ const CommentInput = ({ saveComment }) => {
                 onChange={event => setValue(event.target.value)}
                 value={value}
             />
+            <button type={'submit'}>Submit</button>
         </form>
     );
 };

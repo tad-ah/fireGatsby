@@ -4,7 +4,8 @@ import Comments from '../components/Comments';
 
 export default () => (
     <Layout>
-        <h1>This is a demo page to showcase basic firebase functions.</h1>
-        <p>Each page demoes a different feature within firebase.</p>
+        <h1>Firebase & Gatsby Demo</h1>
+        <p>This is a demo page to showcase firebase.</p>
+        <p>Each page demoes a different feature.</p>
     </Layout>
 );
