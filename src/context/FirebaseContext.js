@@ -64,6 +64,12 @@ class FirebaseProvider extends React.Component {
     }
 }
 
+const PleaseLoginMessage = () => (
+    <p>
+        <i>Please login!</i>
+    </p>
+);
+
 const withFirebase = WrappedComponent => {
     const WithHOC = props => {
         return (
@@ -77,4 +83,23 @@ const withFirebase = WrappedComponent => {
     return WithHOC;
 };
 
-export { FirebaseProvider, withFirebase };
+const withAuthentication = WrappedComponent => {
+    const WithHOC = props => {
+        return (
+            <Context.Consumer>
+                {context =>
+                    context.user ? (
+                        <WrappedComponent {...props} context={context} />
+                    ) : (
+                        <PleaseLoginMessage />
+                    )
+                }
+            </Context.Consumer>
+        );
+    };
+    WithHOC.WrappedComponent = WrappedComponent;
+
+    return WithHOC;
+};
+
+export { FirebaseProvider, withFirebase, withAuthentication, Context };

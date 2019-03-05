@@ -12,16 +12,18 @@ class Firebase {
     static instance;
 
     constructor() {
-        if (Firebase.instance) {
-            return Firebase.instance;
+        if (typeof window !== 'undefined') {
+            if (Firebase.instance) {
+                return Firebase.instance;
+            }
+            this.fire = firebase.initializeApp(config);
+            this.database = firebase.firestore();
+            this.storage = firebase.storage();
+            this.functions = firebase.functions();
+            this.auth = firebase.auth();
+            this.provider = provider;
+            Firebase.instance = this;
         }
-        this.fire = firebase.initializeApp(config);
-        this.database = firebase.firestore();
-        this.storage = firebase.storage();
-        this.functions = firebase.functions();
-        this.auth = firebase.auth();
-        this.provider = provider;
-        Firebase.instance = this;
     }
 }
 

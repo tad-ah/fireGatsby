@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import { Database } from '../firebase';
-import { withFirebase } from '../context/FirebaseContext';
+import { withFirebase, withAuthentication } from '../context/FirebaseContext';
 
 const Container = styled.div`
     display: flex;
@@ -37,14 +37,6 @@ class Comments extends Component {
     };
 
     render() {
-        if (!this.props.context.user) {
-            return (
-                <p>
-                    <i>Please login!</i>
-                </p>
-            );
-        }
-
         return (
             <Container>
                 <CommentInput saveComment={this.addComment} />
@@ -83,4 +75,4 @@ const CommentList = ({ comments }) => (
     </ul>
 );
 
-export default withFirebase(Comments);
+export default withFirebase(withAuthentication(Comments));

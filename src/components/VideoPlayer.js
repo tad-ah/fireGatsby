@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Firebase, Storage } from '../firebase';
+import { withFirebase, withAuthentication } from '../context/FirebaseContext';
 
 const Container = styled.div`
     display: flex;
@@ -81,4 +82,4 @@ class VideoPlayer extends Component {
     }
 }
 
-export default VideoPlayer;
+export default withFirebase(withAuthentication(VideoPlayer));
