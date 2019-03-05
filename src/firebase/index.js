@@ -1,5 +1,9 @@
 import config from './config';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/storage';
+import 'firebase/functions';
+import 'firebase/firestore';
 import moment from 'moment';
 
 const provider = new firebase.auth.GoogleAuthProvider();

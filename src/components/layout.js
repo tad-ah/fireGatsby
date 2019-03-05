@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import styled from 'styled-components';
 import { withFirebase, FirebaseProvider } from '../context/FirebaseContext';
 
 const ListLink = props => (
@@ -9,11 +8,10 @@ const ListLink = props => (
     </li>
 );
 
-
 const Avatar = props => (
     <li style={{ display: `inline-block`, marginRight: `1rem` }}>
         {props.username}
-        <img src={props.photo} style={{width: '10%'}}/>
+        <img alt={'User avatar'} src={props.photo} style={{ width: '10%' }} />
         <button onClick={props.logout}>Log Out</button>
     </li>
 );

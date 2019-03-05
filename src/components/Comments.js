@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import styled from 'styled-components';
-import { Database, Firebase } from '../firebase';
+import { Database } from '../firebase';
+import { withFirebase } from '../context/FirebaseContext';
 
 const Container = styled.div`
     display: flex;
@@ -21,10 +22,14 @@ class Comments extends Component {
     }
 
     componentDidMount() {
-        this.firebase = new Firebase();
-        this.Db = new Database(this.firebase.database);
-        this.Db.getComments().then(comments => this.setState({ comments }));
-        this.Db.subscribeToComments(comments => this.setState({ comments })); //.then(comments => this.setState({ comments }));
+        const { firebase, user } = this.props.context;
+        if (user) {
+            this.Db = new Database(firebase.database);
+            this.Db.getComments().then(comments => this.setState({ comments }));
+            this.Db.subscribeToComments(comments =>
+                this.setState({ comments })
+            );
+        }
     }
 
     addComment = comment => {
@@ -32,6 +37,14 @@ class Comments extends Component {
     };
 
     render() {
+        if (!this.props.context.user) {
+            return (
+                <p>
+                    <i>Please login!</i>
+                </p>
+            );
+        }
+
         return (
             <Container>
                 <CommentInput saveComment={this.addComment} />
@@ -70,4 +83,4 @@ const CommentList = ({ comments }) => (
     </ul>
 );
 
-export default Comments;
+export default withFirebase(Comments);

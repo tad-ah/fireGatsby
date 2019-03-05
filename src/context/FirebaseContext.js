@@ -2,7 +2,6 @@ import React from 'react';
 import { Firebase } from '../firebase';
 
 const Context = React.createContext({});
-const FirebaseConsumer = Context.Consumer;
 
 class FirebaseProvider extends React.Component {
     constructor(props) {
@@ -68,9 +67,9 @@ class FirebaseProvider extends React.Component {
 const withFirebase = WrappedComponent => {
     const WithHOC = props => {
         return (
-            <FirebaseConsumer>
+            <Context.Consumer>
                 {context => <WrappedComponent {...props} context={context} />}
-            </FirebaseConsumer>
+            </Context.Consumer>
         );
     };
     WithHOC.WrappedComponent = WrappedComponent;

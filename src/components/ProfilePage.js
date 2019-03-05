@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Firebase, Storage } from '../firebase';
+import { Firebase } from '../firebase';
 import FileUploader from 'react-firebase-file-uploader';
 
 class ProfilePage extends Component {
@@ -48,7 +48,7 @@ class ProfilePage extends Component {
                     {this.state.isUploading && (
                         <p>Progress: {this.state.progress}</p>
                     )}
-                    {this.state.avatarURL && <img src={this.state.avatarURL} />}
+                    {this.state.avatarURL && <img alt={'avatarUrl'} src={this.state.avatarURL} />}
                     {this.storage && (
                         <FileUploader
                             accept="image/*"

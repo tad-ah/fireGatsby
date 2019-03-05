@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../components/layout';
-import Comments from '../components/Comments';
 
 export default () => (
     <Layout>
