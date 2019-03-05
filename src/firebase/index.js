@@ -2,6 +2,8 @@ import config from './config';
 import firebase from 'firebase';
 import moment from 'moment';
 
+const provider = new firebase.auth.GoogleAuthProvider();
+
 class Firebase {
     static instance;
 
@@ -14,6 +16,7 @@ class Firebase {
         this.storage = firebase.storage();
         this.functions = firebase.functions();
         this.auth = firebase.auth();
+        this.provider = provider;
         Firebase.instance = this;
     }
 }

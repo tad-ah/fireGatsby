@@ -39,14 +39,14 @@ jobs:
                       - node_modules
                   key: v1-dependencies-{{ checksum "package.json" }}
 
-            - run:
-                  name: Build application
-                  command: yarn build
-
-            # run tests!
+                  # run tests!
             - run:
                   name: Run tests
                   command: yarn test
+
+            - run:
+                  name: Build application
+                  command: yarn build
 
             - run:
                   name: Deploy Master to Firebase
