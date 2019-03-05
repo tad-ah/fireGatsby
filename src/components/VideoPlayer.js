@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Firebase, Storage } from '../firebase';
-import { withFirebase, withAuthentication } from '../context/FirebaseContext';
+import { Storage } from '../firebase';
+import { withFireAuthentication } from '../context/FirebaseContext';
 
 const Container = styled.div`
     display: flex;
@@ -25,8 +25,8 @@ class VideoPlayer extends Component {
     }
 
     componentDidMount() {
-        this.firebase = new Firebase();
-        this.storage = new Storage(this.firebase.storage);
+        const { firebase } = this.props.context;
+        this.storage = new Storage(firebase.storage);
 
         this.fetchSpiderManVideo();
 
@@ -82,4 +82,4 @@ class VideoPlayer extends Component {
     }
 }
 
-export default withFirebase(withAuthentication(VideoPlayer));
+export default withFireAuthentication(VideoPlayer);

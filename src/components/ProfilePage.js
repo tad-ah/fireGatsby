@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Firebase } from '../firebase';
+import { withFireAuthentication } from '../context/FirebaseContext';
 import FileUploader from 'react-firebase-file-uploader';
 
 class ProfilePage extends Component {
@@ -48,7 +49,9 @@ class ProfilePage extends Component {
                     {this.state.isUploading && (
                         <p>Progress: {this.state.progress}</p>
                     )}
-                    {this.state.avatarURL && <img alt={'avatarUrl'} src={this.state.avatarURL} />}
+                    {this.state.avatarURL && (
+                        <img alt={'avatarUrl'} src={this.state.avatarURL} />
+                    )}
                     {this.storage && (
                         <FileUploader
                             accept="image/*"
@@ -67,4 +70,4 @@ class ProfilePage extends Component {
     }
 }
 
-export default ProfilePage;
+export default withFireAuthentication(ProfilePage);

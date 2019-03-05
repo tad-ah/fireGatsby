@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import { Database } from '../firebase';
-import { withFirebase, withAuthentication } from '../context/FirebaseContext';
+import { withFireAuthentication } from '../context/FirebaseContext';
 
 const Container = styled.div`
     display: flex;
@@ -75,4 +75,4 @@ const CommentList = ({ comments }) => (
     </ul>
 );
 
-export default withFirebase(withAuthentication(Comments));
+export default withFireAuthentication(Comments);

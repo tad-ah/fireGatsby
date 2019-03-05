@@ -102,4 +102,13 @@ const withAuthentication = WrappedComponent => {
     return WithHOC;
 };
 
-export { FirebaseProvider, withFirebase, withAuthentication, Context };
+const withFireAuthentication = WrappedComponent =>
+    withFirebase(withAuthentication(WrappedComponent));
+
+export {
+    FirebaseProvider,
+    Context,
+    withFirebase,
+    withAuthentication,
+    withFireAuthentication,
+};
