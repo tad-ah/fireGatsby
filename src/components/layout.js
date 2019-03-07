@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { withFirebase, FirebaseProvider } from '../context/FirebaseContext';
+import './layout.css';
 
 const ListLink = props => (
     <li style={{ display: `inline-block`, marginRight: `1rem` }}>
@@ -9,10 +10,30 @@ const ListLink = props => (
 );
 
 const Avatar = props => (
-    <li style={{ display: `inline-block`, marginRight: `1rem` }}>
-        {props.username}
-        <img alt={'User avatar'} src={props.photo} style={{ width: '10%' }} />
-        <button onClick={props.logout}>Log Out</button>
+    <li
+        style={{
+            display: `inline-block`,
+            marginRight: `1rem`,
+            alignItems: '',
+        }}
+    >
+        <div className={'user-profile'}>
+            <img
+                style={{ maxWidth: '25%' }}
+                src={
+                    props.photo
+                }
+            />
+
+            <ul className="dropdown">
+                <li>{props.username}</li>
+                <li>
+                    <a href="#" onClick={props.logout}>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 );
 
@@ -36,18 +57,21 @@ const Header = props => {
                 <ListLink to="/">Home</ListLink>
                 <ListLink to="/comments/">Firestore</ListLink>
                 <ListLink to="/storage/">Storage</ListLink>
-                <ListLink to="/storage-upload/">Storage Upload</ListLink>
-
-                {props.context.user ? (
-                    <Avatar
-                        logout={props.context.logout}
-                        username={props.context.user.displayName}
-                        photo={props.context.user.photoURL}
-                    />
-                ) : (
-                    <button onClick={props.context.login}>Log In</button>
+                <ListLink to="/storage-upload/">Upload</ListLink>
+                {!props.context.user && (
+                    <ListLink to="#">
+                        <button onClick={props.context.login}>Log In</button>
+                    </ListLink>
                 )}
             </ul>
+
+            {props.context.user && (
+                <Avatar
+                    logout={props.context.logout}
+                    username={props.context.user.displayName}
+                    photo={props.context.user.photoURL}
+                />
+            )}
         </header>
     );
 };
