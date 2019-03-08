@@ -2,10 +2,11 @@ import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import { Database } from '../firebase';
 import { withFireAuthentication } from '../context/FirebaseContext';
+import { Input, Button, Form } from 'semantic-ui-react';
 
 const Container = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
 `;
 
@@ -32,9 +33,7 @@ class Comments extends Component {
         }
     }
 
-    addComment = comment => {
-        this.Db.addComment(comment);
-    };
+    addComment = comment => this.Db.addComment(comment);
 
     render() {
         return (
@@ -49,19 +48,22 @@ class Comments extends Component {
 const CommentInput = ({ saveComment }) => {
     const [value, setValue] = useState('');
     return (
-        <form
+        <Form
             onSubmit={event => {
                 event.preventDefault();
                 saveComment(value);
                 setValue('');
             }}
         >
-            <input
-                onChange={event => setValue(event.target.value)}
-                value={value}
-            />
-            <button type={'submit'}>Submit</button>
-        </form>
+            <Form.Field>
+                <Input
+                    onChange={event => setValue(event.target.value)}
+                    placeholder="Search..."
+                    labelPosition={'right'}
+                    label={<Button color={'teal'}>Submit</Button>}
+                />
+            </Form.Field>
+        </Form>
     );
 };
 

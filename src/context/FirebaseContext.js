@@ -9,27 +9,29 @@ class FirebaseProvider extends React.Component {
         this.state = {
             firebase: new Firebase(),
             user: null,
+            claims: {},
         };
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
     }
 
     componentDidMount() {
-        const { firebase } = this.state;
-        const auth = firebase.auth;
+        const { auth } = this.state.firebase;
         auth.onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user });
+
+                this.fetchCustomClaims();
             }
         });
     }
 
     logout() {
-        const { firebase } = this.state;
-        const auth = firebase.auth;
+        const { auth } = this.state.firebase;
         auth.signOut().then(() => {
             this.setState({
                 user: null,
+                claims: null,
             });
         });
     }
@@ -40,19 +42,41 @@ class FirebaseProvider extends React.Component {
         const provider = firebase.provider;
         auth.signInWithPopup(provider).then(result => {
             const user = result.user;
+            console.log(user);
             this.setState({
                 user,
             });
+
+            this.fetchCustomClaims();
         });
     }
 
+    fetchCustomClaims = () => {
+        const { auth } = this.state.firebase;
+        auth.currentUser
+            .getIdTokenResult()
+            .then(idTokenResult => {
+                // Confirm the user is an Admin.
+                if (!!idTokenResult.claims.admin) {
+                    console.log(idTokenResult.claims);
+                    this.setState({
+                        claims: idTokenResult.claims,
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+
     render() {
-        const { firebase, user } = this.state;
+        const { firebase, user, claims } = this.state;
         return (
             <Context.Provider
                 value={{
                     firebase,
                     user,
+                    claims,
                     test: this.props.test,
                     login: this.login,
                     logout: this.logout,
