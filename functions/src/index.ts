@@ -25,9 +25,9 @@ export const grantAdminRole = functions.https.onRequest((request, response) => {
             .verifyIdToken(tokenId)
             .then(token => {
                 console.log(token);
-                grantAdmin().then(() =>
-                    console.log('Done granting admin rights.')
-                );
+                grantAdmin()
+                    .then(() => console.log('Done granting admin rights.'))
+                    .catch(err => console.log('Failed granting admin rights.'));
             })
             .catch(error => response.status(401).send(error));
     }
