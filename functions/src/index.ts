@@ -25,7 +25,9 @@ export const grantAdminRole = functions.https.onRequest((request, response) => {
             .verifyIdToken(tokenId)
             .then(token => {
                 console.log(token);
-                grantAdmin();
+                grantAdmin().then(() =>
+                    console.log('Done granting admin rights.')
+                );
             })
             .catch(error => response.status(401).send(error));
     }
@@ -42,7 +44,17 @@ async function grantAdmin() {
                 const user = doc.data();
                 console.log(user);
 
-                admin.auth().setCustomUserClaims(user.uid, { admin: true });
+                admin
+                    .auth()
+                    .setCustomUserClaims(user.uid, { admin: true })
+                    .then(() =>
+                        console.log(`Assigned admin claims to user ${user.uid}`)
+                    )
+                    .catch(err =>
+                        console.log(
+                            `Failed to assign claims to user ${user.uid}`
+                        )
+                    );
             });
         })
         .catch(function(error) {
